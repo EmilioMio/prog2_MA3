@@ -115,45 +115,45 @@ def sphere_volume_parallel(n, d, np=10):
 
 
 def main():
-    # # Exc1
-    # dots = [1000, 10000, 100000]
-    # for n in dots:
-    #     approximate_pi(n)
+    # Exc1
+    dots = [1000, 10000, 100000]
+    for n in dots:
+        approximate_pi(n)
 
-    # # Exc2
-    # n = 100000
-    # d = 2
-    # r = 1
+    # Exc2
+    n = 100000
+    d = 2
+    r = 1
 
-    # print(f"Approximate volume of {d} dimensional sphere with radius r = {r} (using n = {n}) = {sphere_volume(n, d)}")
-    # print(f"Actual volume of {d} dimensional sphere = {hypersphere_exact(n,d)}")
+    print(f"Approximate volume of {d} dimensional sphere with radius r = {r} (using n = {n}) = {sphere_volume(n, d)}")
+    print(f"Actual volume of {d} dimensional sphere = {hypersphere_exact(n,d)}")
 
-    # n = 100000
-    # d = 11
-    # r = 1
+    n = 100000
+    d = 11
+    r = 1
 
-    # print(f"Approximate volume of {d} dimensional sphere with radius r = {r} (using n = {n}) = {sphere_volume(n, d)}")
-    # print(f"Actual volume of {d} dimensional sphere with radius r = {r} = {hypersphere_exact(n,d)}")
+    print(f"Approximate volume of {d} dimensional sphere with radius r = {r} (using n = {n}) = {sphere_volume(n, d)}")
+    print(f"Actual volume of {d} dimensional sphere with radius r = {r} = {hypersphere_exact(n,d)}")
 
-    # # Exc3: 
-    # n = 1000000
-    # d = 11
+    # Exc3: 
+    n = 1000000
+    d = 11
 
-    # times_python = []
-    # for i in range(3):
-    #     start = pc()
-    #     sphere_volume(n, d)
-    #     stop = pc()
-    #     times_python.append(stop-start)
-    #     print(f"Exc3: Sequential time of d = {d} and n = {n} using conventional Python (call {i+1}): {stop-start}")
+    times_python = []
+    for i in range(3):
+        start = pc()
+        sphere_volume(n, d)
+        stop = pc()
+        times_python.append(stop-start)
+        print(f"Exc3: Sequential time of d = {d} and n = {n} using conventional Python (call {i+1}): {stop-start}")
     
-    # times_numba = []
-    # for i in range(3):
-    #     start_numba = pc()
-    #     sphere_volume_numba(n, d)
-    #     stop_numba = pc()
-    #     times_numba.append(stop_numba-start_numba)
-    #     print(f"Exc3: Sequential time of d = {d} and n = {n} using Numba (call {i+1}): {stop_numba-start_numba}")
+    times_numba = []
+    for i in range(3):
+        start_numba = pc()
+        sphere_volume_numba(n, d)
+        stop_numba = pc()
+        times_numba.append(stop_numba-start_numba)
+        print(f"Exc3: Sequential time of d = {d} and n = {n} using Numba (call {i+1}): {stop_numba-start_numba}")
 
     # # Plot the times for Python and Numba together
     # plt.plot([1, 2, 3], times_python, marker="o", label="Conventional Python")
@@ -177,13 +177,23 @@ def main():
     sphere_volume(n, d)
     stop = pc()
     print(f"Exc4: Sequential time of {d} and {n}: {stop-start}")
-    # Exc4: Sequential time of 11 and 1000000: 4.402295300038531
 
     start_parallel = pc()
     sphere_volume_parallel(n, d)
     stop_parallel = pc()
     print(f"Exc4: Parallel time of {d} and {n}: {stop_parallel-start_parallel}")
+    
+    # On local PC
+    # Exc4: Sequential time of 11 and 1000000: 4.402295300038531
     # Exc4: Parallel time of 11 and 1000000: 6.063679000129923
+
+    # On Linux Servers
+    #Exc4: Sequential time of 11 and 1000000: 14.091906297020614
+    #Exc4: Parallel time of 11 and 1000000: 1.5753624450881034
+
+    # Differences
+    # Sequential: About 9.7 seconds slower on Linux server
+    # Parallel: About 4.5 secound faster on Linux server (approx 3.85 times as fast)
     
 
 if __name__ == '__main__':
