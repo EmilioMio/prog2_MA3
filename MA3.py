@@ -14,7 +14,7 @@ import numpy as np
 from statistics import mean 
 from time import perf_counter as pc
 from functools import reduce
-from numba import njit
+#from numba import njit
 import concurrent.futures as future
 
 # Exc1
@@ -77,7 +77,7 @@ def hypersphere_exact(n, d, r=1):
     return V_exact
 
 #Exc3: numba version
-@njit
+#@njit
 def sphere_volume_numba(n:int, d:int, r=1)->float:
     # n is the number of points
     # d is the number of dimensions of the sphere
@@ -177,11 +177,13 @@ def main():
     sphere_volume(n, d)
     stop = pc()
     print(f"Exc4: Sequential time of {d} and {n}: {stop-start}")
+    # Exc4: Sequential time of 11 and 1000000: 4.402295300038531
 
     start_parallel = pc()
     sphere_volume_parallel(n, d)
     stop_parallel = pc()
     print(f"Exc4: Parallel time of {d} and {n}: {stop_parallel-start_parallel}")
+    # Exc4: Parallel time of 11 and 1000000: 6.063679000129923
     
 
 if __name__ == '__main__':
